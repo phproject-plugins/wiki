@@ -12,7 +12,7 @@ class Base extends \Plugin {
 	/**
 	 * Initialize the plugin
 	 */
-	public function load() {
+	public function _load() {
 		// No hooks required
 	}
 
