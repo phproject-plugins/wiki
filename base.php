@@ -10,6 +10,13 @@ namespace Plugin\Wiki;
 class Base extends \Plugin {
 
 	/**
+	 * Initialize the plugin
+	 */
+	public function load() {
+		// No hooks required
+	}
+
+	/**
 	 * Install plugin (add database tables)
 	 */
 	public function _install() {
