@@ -2,7 +2,7 @@
 /**
  * @package  Wiki
  * @author   Alan Hardman <alan@phpizza.com>
- * @version  0.0.2
+ * @version  0.0.3
  */
 
 namespace Plugin\Wiki;
