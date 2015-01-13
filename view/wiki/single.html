@@ -6,7 +6,10 @@
 <body>
 <div class="container">
 	<include href="blocks/navbar.html" />
-
+	<h1>{{ @page.name }}</h1>
+	<div class="tex">
+		{{ @this->parseTextile(@page.content) }}
+	</div>
 	<include href="blocks/footer.html" />
 </div>
 </body>

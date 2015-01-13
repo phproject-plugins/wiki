@@ -6,8 +6,50 @@
 <body>
 <div class="container">
 	<include href="blocks/navbar.html" />
-
+	<form action="{{ @site.url }}wiki/edit/{{ @PARAMS.page }}" method="post" autocomplete="off">
+		<div class="form-group">
+			<label for="name">{{ @dict.wiki.page_title }}</label>
+			<input class="form-control" name="name" id="name" value="{{ @page.name | esc }}" required maxlength="64">
+		</div>
+		<div class="form-group">
+			<label for="slug">{{ @dict.wiki.slug }}</label>
+			<input class="form-control input-sm" name="slug" id="slug" value="{{ @page.slug ?: @PARAMS.page | esc }}" required maxlength="64">
+		</div>
+		<div class="form-group">
+			<label for="content">{{ @dict.wiki.content }}</label>
+			<textarea class="form-control input-sm" name="content" id="content" rows="12" required>{{ @page.content | esc }}</textarea>
+		</div>
+		<div class="text-right">
+			<a href="{{ @site.url }}wiki/{{ @PARAMS.page }}" class="btn btn-sm btn-default">{{ @dict.cancel }}</a>
+			<button type="reset" class="btn btn-sm btn-default">{{ @dict.reset }}</button>
+			<button type="submit" class="btn btn-sm btn-primary">{{ @dict.save }}</button>
+		</div>
+	</form>
 	<include href="blocks/footer.html" />
+	<script type="text/javascript">
+	function slug(str) {
+		str = str.replace(/^\s+|\s+$/g, '');
+		str = str.toLowerCase();
+
+		var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+		var to   = "aaaaeeeeiiiioooouuuunc------";
+		for (var i = 0, l = from.length; i < l; i++) {
+			str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+		}
+
+		return str.replace(/[^a-z0-9 -]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+	}
+	$(document).ready(function() {
+		if(!$('#slug').val().length) {
+			$('#name').keyup(function(e) {
+				$('#slug').val(slug($('#name').val()));
+			});
+			$('#name').change(function(e) {
+				$('#slug').val(slug($('#name').val()));
+			});
+		}
+	});
+	</script>
 </div>
 </body>
 </html>

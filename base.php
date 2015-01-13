@@ -21,6 +21,7 @@ class Base extends \Plugin {
 		// Add routes
 		$f3->route("GET /wiki", "Plugin\Wiki\Controller->index");
 		$f3->route("GET /wiki/@page", "Plugin\Wiki\Controller->single");
+		$f3->route("GET|POST /wiki/edit", "Plugin\Wiki\Controller->edit");
 		$f3->route("GET|POST /wiki/edit/@page", "Plugin\Wiki\Controller->edit");
 	}
 

@@ -5,9 +5,9 @@
  * @version  0.0.2
  */
 
-namespace Plugin\Model\Wiki\Model;
+namespace Plugin\Wiki\Model\Page;
 
-class Page extends \Model {
+class Update extends \Model {
 
 	protected $_table_name = "wiki_page_update";
 
