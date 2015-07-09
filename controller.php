@@ -11,7 +11,7 @@ class Controller extends \Controller {
 
 	public function index($f3) {
 		$page = new Model\Page;
-		$pages = $page->find(null, array("order" => "name ASC"));
+		$pages = $page->find(array("deleted_date IS NULL"), array("order" => "name ASC"));
 
 		$f3->set("pages", $pages);
 
@@ -35,17 +35,16 @@ class Controller extends \Controller {
 		$update = new Model\Page\Update;
 		$db = $f3->get("db.instance");
 		$maxUpdateId = $db->exec("SELECT MAX(id) id FROM wiki_page_update WHERE wiki_page_id = :id", array(":id" => $page->id));
-		if($maxUpdateId) {
-			$maxUpdateId = intval($maxUpdateId[0]['id']);
-			$updateCount = $db->exec("SELECT COUNT(*) num FROM wiki_page_update WHERE wiki_page_id = :id", array(":id" => $page->id));
-			$f3->set("update_count", intval($updateCount[0]['num']));
-			$update->load($maxUpdateId);
-			if($update->id) {
-				$user = new \Model\User;
-				$user->load($update->user_id);
-				$f3->set("update_user", $user);
-			}
-		}
+		$update->load(intval($maxUpdateId[0]['id']));
+
+		// Load update user
+		$user = new \Model\User;
+		$user->load($update->user_id);
+		$f3->set("update_user", $user);
+
+		// Load update count
+		$updateCount = $db->exec("SELECT COUNT(*) num FROM wiki_page_update WHERE wiki_page_id = :id", array(":id" => $page->id));
+		$f3->set("update_count", intval($updateCount[0]['num']));
 
 		$f3->set("title", $page->name);
 		$f3->set("page", $page);
@@ -106,6 +105,13 @@ class Controller extends \Controller {
 		$f3->set("page", $page);
 		$f3->set("UI", $f3->get("UI") . ";./app/plugin/wiki/view/");
 		$this->_render("wiki/edit.html");
+	}
+
+	public function delete($f3, $params) {
+		$page = new Model\Page;
+		$page->load(array("slug = ?", $params["page"]));
+		$page->delete();
+		$f3->reroute("/wiki");
 	}
 
 }

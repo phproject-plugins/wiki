@@ -8,7 +8,7 @@ CREATE TABLE `wiki_page` (
 	`content` mediumtext NOT NULL,
 	`parent_id` int(10) unsigned DEFAULT NULL,
 	`created_date` datetime NOT NULL,
-	`deleted_date` datetime NOT NULL,
+	`deleted_date` datetime NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

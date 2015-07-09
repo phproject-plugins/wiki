@@ -10,13 +10,18 @@
 		<h1 class="pull-left">{{ @page.name }}</h1>
 		<p class="pull-right">
 			<br>
-			<a href="{{ @BASE }}/wiki/edit/{{ @page.slug }}" class="btn btn-default btn-sm">Edit Page</a>
+			<a href="{{ @BASE }}/wiki/edit/{{ @page.slug }}" class="btn btn-default btn-xs">
+				<span class="glyphicon glyphicon-pencil"></span>&ensp;{{ @dict.edit }}
+			</a>
+			<a href="{{ @BASE }}/wiki/delete/{{ @page.slug }}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this page?');">
+				<span class="glyphicon glyphicon-remove"></span>&ensp;{{ @dict.delete }}
+			</a>
 		</p>
 	</div>
 	<check if="{{ @update.id }}">
 		<p class="text-muted">
 			Page last edited by <a href="{{ @BASE }}/user/{{ @update_user.username }}" class="nolink">{{ @update_user.name }}</a> on {{ date('M j, Y', strtotime(@update.created_date)) }}
-			&middot; {{ @update_count }} revisions
+			&middot; {{ @update_count }} {{ @update_count > 1 ? 'revisions' : 'revision' }}
 		</p>
 	</check>
 	<hr>
