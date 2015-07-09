@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<include href="blocks/head.html" />
+</head>
+<body>
+<div class="container">
+	<include href="blocks/navbar.html" />
+	<check if="{{ @pages }}">
+		<true>
+			<div class="clearfix">
+				<h1 class="pull-left">Wiki Pages</h1>
+				<div class="pull-right">
+					<br>
+					<a href="{{ @BASE }}/wiki/edit/" class="btn btn-primary btn-sm">New Page</a>
+				</div>
+			</div>
+			<br>
+			<div class="list-group">
+				<repeat group="{{ @pages }}" value="{{ @page }}">
+					<a href="{{ @BASE }}/wiki/{{ @page.slug }}" class="list-group-item">
+						<span class="glyphicon glyphicon-file"></span>&nbsp;
+						{{ @page.name }}
+					</a>
+				</repeat>
+			</div>
+		</true>
+		<false>
+			<div class="well">
+				<div class="text-center" style="margin: 2em 0;">
+					<p class="h3"><span class="glyphicon glyphicon-book"></span></p>
+					<h3>Welcome to the wiki!</h3>
+					<p>Wikis let you collaboratively build documentation for your projects.</p>
+					<a href="#" class="btn btn-primary btn-sm">Create a Page</a>
+				</div>
+			</div>
+		</false>
+	</check>
+	<include href="blocks/footer.html" />
+</div>
+</body>
+</html>

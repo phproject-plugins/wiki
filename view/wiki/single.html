@@ -6,7 +6,20 @@
 <body>
 <div class="container">
 	<include href="blocks/navbar.html" />
-	<h1>{{ @page.name }}</h1>
+	<div class="clearfix">
+		<h1 class="pull-left">{{ @page.name }}</h1>
+		<p class="pull-right">
+			<br>
+			<a href="{{ @BASE }}/wiki/edit/{{ @page.slug }}" class="btn btn-default btn-sm">Edit Page</a>
+		</p>
+	</div>
+	<check if="{{ @update.id }}">
+		<p class="text-muted">
+			Page last edited by <a href="{{ @BASE }}/user/{{ @update_user.username }}" class="nolink">{{ @update_user.name }}</a> on {{ date('M j, Y', strtotime(@update.created_date)) }}
+			&middot; {{ @update_count }} revisions
+		</p>
+	</check>
+	<hr>
 	<div class="tex">
 		{{ @page.content | parseText }}
 	</div>
