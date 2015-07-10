@@ -42,9 +42,16 @@ class Base extends \Plugin {
 	 */
 	public function _installed() {
 		$f3 = \Base::instance();
+		if($f3->get("plugins.wiki.installed")) {
+			return true;
+		}
 		$db = $f3->get("db.instance");
 		$q = $db->exec("SHOW TABLES LIKE 'wiki_page'");
-		return !!$db->count();
+		$installed = !!$db->count();
+		if($installed) {
+			$f3->set("plugins.wiki.installed", true, 3600*24);
+		}
+		return $installed;
 	}
 
 	/**

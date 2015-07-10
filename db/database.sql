@@ -12,7 +12,6 @@ CREATE TABLE `wiki_page` (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 DROP TABLE IF EXISTS `wiki_page_update`;
 CREATE TABLE `wiki_page_update` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
