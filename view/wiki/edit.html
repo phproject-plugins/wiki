@@ -19,7 +19,7 @@
 			<label for="slug">{{ @dict.wiki.parent }}</label>
 
 			<select class="form-control input-sm" name="parent_id">
-					<option value="" selected>ROOT</option>
+					<option value="">(No parent)</option>
 					<repeat group="{{ @pages }}" value="{{ @wikipage }}">
 						<check if="{{ !empty(@page.parent_id) && @page.parent_id == @wikipage.id }}">
 							<true><option value="{{ @wikipage.id }}" selected>{{ @wikipage.name }}</option></true>
@@ -50,7 +50,7 @@
 			str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
 		}
 
-		return str.replace(/[^a-z0-9 -]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+		return str.replace(/[^a-z0-9\s-]/g, '').replace(/[\s-]+/g, '-');
 	}
 	$(document).ready(function() {
 		if(!$('#slug').val().length) {

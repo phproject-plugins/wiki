@@ -14,7 +14,7 @@ class Controller extends \Controller {
 
 		$page = new Model\Page;
 		$page->indent = 0;
-		$pages = $this->build_tree($page->find(array("deleted_date IS NULL"), array("order" => "name ASC")), false);
+		$pages = $this->build_tree($page->find(array("deleted_date IS NULL"), array("order" => "name ASC")));
 
 		$f3->set("title", "Wiki");
 		$f3->set("pages", $pages);
@@ -134,21 +134,21 @@ class Controller extends \Controller {
 	}
 
 
-	function build_tree($pages, $add_spaces){
+	function build_tree($pages, $add_spaces = false) {
 		$data = array();
 		$index = array();
 		foreach($pages as $row){
-	    $id = $row["id"];
-	    $parent_id = $row["parent_id"] === NULL ? "" : $row["parent_id"];
-	    $data[$id] = $row;
-	    $index[$parent_id][] = $id;
+			$id = $row["id"];
+			$parent_id = $row["parent_id"] === NULL ? "" : $row["parent_id"];
+			$data[$id] = $row;
+			$index[$parent_id][] = $id;
 		}
 		$newarray = array();
 		$level = 0;
 		foreach ($pages as $row) {
-			if($row["parent_id"] == ""){
+			if($row["parent_id"] == "") {
 				if($add_spaces){
-					$row["name"] = str_repeat("&nbsp;&nbsp;", $level+1) . $row["name"];
+					$row["name"] = str_repeat("&emsp;", $level) . $row["name"];
 				}
 				$row["indent"] = $level;
 				$newarray[] = $row;
@@ -156,22 +156,20 @@ class Controller extends \Controller {
 			}
 		}
 
-		//$this->display_child_nodes("", 0, $data, $index, $newarray, $add_spaces);
 		return $newarray;
 	}
 
 
-	function display_child_nodes($parent_id, $level, &$data, &$index, &$newarray, $add_spaces) {
-	    $parent_id = $parent_id === NULL ? "" : $parent_id;
-	    if (isset($index[$parent_id])) {
-	        foreach ($index[$parent_id] as $id) {
-						if($add_spaces){
-							$data[$id]["name"] = str_repeat("&nbsp;&nbsp;", $level+1) . $data[$id]["name"];
-						}
-						$data[$id]["indent"] = $level;
-						$newarray[] = $data[$id];
-            $this->display_child_nodes($id, $level + 1, $data, $index, $newarray, $add_spaces);
-	        }
-	    }
+	function display_child_nodes($parent_id, $level, &$data, &$index, &$newarray, $add_spaces = false) {
+		if (isset($index[$parent_id])) {
+			foreach ($index[$parent_id] as $id) {
+				if($add_spaces){
+					$data[$id]["name"] = str_repeat("&emsp;", $level) . $data[$id]["name"];
+				}
+				$data[$id]["indent"] = $level;
+				$newarray[] = $data[$id];
+				$this->display_child_nodes($id, $level + 1, $data, $index, $newarray, $add_spaces);
+			}
+		}
 	}
 }
