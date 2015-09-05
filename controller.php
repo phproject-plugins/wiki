@@ -13,6 +13,7 @@ class Controller extends \Controller {
 		$page = new Model\Page;
 		$pages = $page->find(array("deleted_date IS NULL"), array("order" => "name ASC"));
 
+		$f3->set("title", "Wiki");
 		$f3->set("pages", $pages);
 
 		$f3->set("UI", $f3->get("UI") . ";./app/plugin/wiki/view/");
@@ -102,6 +103,7 @@ class Controller extends \Controller {
 			}
 		}
 
+		$f3->set("title", "Edit Page");
 		$f3->set("page", $page);
 		$f3->set("UI", $f3->get("UI") . ";./app/plugin/wiki/view/");
 		$this->_render("wiki/edit.html");

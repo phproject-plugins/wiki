@@ -18,6 +18,7 @@
 			<div class="list-group">
 				<repeat group="{{ @pages }}" value="{{ @page }}">
 					<a href="{{ @BASE }}/wiki/{{ @page.slug }}" class="list-group-item">
+						<span class="badge hidden-xs">{{ date('M j, Y', strtotime(@page.created_date)) }}</span>
 						<span class="glyphicon glyphicon-file"></span>&nbsp;
 						{{ @page.name }}
 					</a>
