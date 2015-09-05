@@ -20,7 +20,14 @@
 					<a style="padding-left: {{ 20*(@page.indent+1) }}px;" href="{{ @BASE }}/wiki/{{ @page.slug }}" class="list-group-item">
 						<span class="badge hidden-xs">{{ date('M j, Y', strtotime(@page.created_date)) }}</span>
 						<span class="glyphicon glyphicon-file"></span>&nbsp;
-						{{ @page.name }}
+						<check if="{{ @page.indent }}">
+							<true>
+								{{ @page.name }}
+							</true>
+							<false>
+								<b>{{ @page.name }}</b>
+							</false>
+						</check>
 					</a>
 				</repeat>
 			</div>
