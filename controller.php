@@ -2,7 +2,7 @@
 /**
  * @package  Wiki
  * @author   Alan Hardman <alan@phpizza.com>
- * @version  0.0.3
+ * @version  1.1.0
  */
 
 namespace Plugin\Wiki;
@@ -10,6 +10,8 @@ namespace Plugin\Wiki;
 class Controller extends \Controller {
 
 	public function index($f3) {
+		$this->_requireLogin(0);
+
 		$page = new Model\Page;
 		$pages = $page->find(array("deleted_date IS NULL"), array("order" => "name ASC"));
 
@@ -21,6 +23,8 @@ class Controller extends \Controller {
 	}
 
 	public function single($f3, $params) {
+		$this->_requireLogin(0);
+
 		$page = new Model\Page;
 		$page->load(array("slug = ?", $params["page"]));
 
@@ -54,6 +58,8 @@ class Controller extends \Controller {
 	}
 
 	public function edit($f3, $params) {
+		$this->_requireLogin(2);
+
 		if(!isset($params["page"])) {
 			$params["page"] = null;
 			$f3->set("PARAMS.page", "");
@@ -110,6 +116,8 @@ class Controller extends \Controller {
 	}
 
 	public function delete($f3, $params) {
+		$this->_requireLogin(3);
+
 		$page = new Model\Page;
 		$page->load(array("slug = ?", $params["page"]));
 		$page->delete();
