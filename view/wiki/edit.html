@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 	<include href="blocks/head.html" />
+	<check if="{{ @parse.markdown }}">
+		<link rel="stylesheet" type="text/css" href="{{ @BASE }}/css/simplemde.min.css">
+	</check>
 </head>
 <body>
 <div class="container">
@@ -17,7 +20,6 @@
 		</div>
 		<div class="form-group">
 			<label for="slug">{{ @dict.wiki.parent }}</label>
-
 			<select class="form-control input-sm" name="parent_id">
 					<option value="">(No parent)</option>
 					<repeat group="{{ @pages }}" value="{{ @wikipage }}">
@@ -39,6 +41,9 @@
 		</div>
 	</form>
 	<include href="blocks/footer.html" />
+	<check if="{{ @parse.markdown }}">
+		<script src="{{ @BASE }}/js/simplemde.min.js"></script>
+	</check>
 	<script type="text/javascript">
 	function slug(str) {
 		str = str.replace(/^\s+|\s+$/g, '');
@@ -62,6 +67,11 @@
 			});
 		}
 	});
+	var simplemde = new SimpleMDE({
+		element: document.getElementById('content'),
+		toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 'ordered-list', '|', 'link', 'image', '|', 'preview', 'guide']
+	});
+	simplemde.render();
 	</script>
 </div>
 </body>
