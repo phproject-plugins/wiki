@@ -3,6 +3,7 @@
 <head>
 	<include href="blocks/head.html" />
 	<check if="{{ @parse.markdown }}">
+		<link rel="stylesheet" type="text/css" href="{{ @BASE }}/app/plugin/wiki/css/wiki.css">
 		<link rel="stylesheet" type="text/css" href="{{ @BASE }}/css/simplemde.min.css">
 	</check>
 </head>
@@ -30,7 +31,7 @@
 					</repeat>
 			</select>
 		</div>
-		<div class="form-group">
+		<div class="form-group wiki-content">
 			<label for="content">{{ @dict.wiki.content }}</label>
 			<textarea class="form-control input-sm" name="content" id="content" rows="12" required>{{ @page.content | esc }}</textarea>
 		</div>
