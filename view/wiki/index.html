@@ -17,9 +17,17 @@
 			<br>
 			<div class="list-group">
 				<repeat group="{{ @pages }}" value="{{ @page }}">
-					<a href="{{ @BASE }}/wiki/{{ @page.slug }}" class="list-group-item">
-						<span class="glyphicon glyphicon-file"></span>&nbsp;
-						{{ @page.name }}
+					<a style="padding-left: {{ 20*(@page.indent+1) }}px;" href="{{ @BASE }}/wiki/{{ @page.slug }}" class="list-group-item">
+						<span class="badge hidden-xs">{{ date('M j, Y', strtotime(@page.created_date)) }}</span>
+						<span class="fa fa-file"></span>&nbsp;
+						<check if="{{ @page.indent }}">
+							<true>
+								{{ @page.name }}
+							</true>
+							<false>
+								<b>{{ @page.name }}</b>
+							</false>
+						</check>
 					</a>
 				</repeat>
 			</div>
@@ -27,7 +35,7 @@
 		<false>
 			<div class="well">
 				<div class="text-center" style="margin: 2em 0;">
-					<p class="h3"><span class="glyphicon glyphicon-book"></span></p>
+					<p class="h3"><span class="fa fa-book"></span></p>
 					<h3>Welcome to the wiki!</h3>
 					<p>Wikis let you collaboratively build documentation for your projects.</p>
 					<a href="{{ @BASE }}/wiki/edit/" class="btn btn-primary btn-sm">Create a Page</a>

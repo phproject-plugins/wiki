@@ -1,0 +1,423 @@
+/**
+ * Wiki content style
+ * Based on https://github.com/sindresorhus/github-markdown-css/
+ * MIT License
+ */
+
+.wiki-content {
+	line-height: 1.6;
+	word-wrap: break-word;
+}
+
+.wiki-content a {
+	background-color: transparent;
+}
+
+.wiki-content a:active,
+.wiki-content a:hover {
+	outline: 0;
+}
+
+.wiki-content strong {
+	font-weight: bold;
+}
+
+.wiki-content h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+
+.wiki-content img {
+	border: 0;
+}
+
+.wiki-content pre {
+	overflow: auto;
+}
+
+.wiki-content kbd,
+.wiki-content pre {
+	font-family: monospace, monospace;
+	font-size: 1em;
+}
+
+.wiki-content input {
+	color: inherit;
+	font: inherit;
+	margin: 0;
+}
+
+.wiki-content html input[disabled] {
+	cursor: default;
+}
+
+.wiki-content input {
+	line-height: normal;
+}
+
+.wiki-content input[type="checkbox"] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.wiki-content table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.wiki-content td,
+.wiki-content th {
+	padding: 0;
+}
+
+.wiki-content * {
+	box-sizing: border-box;
+}
+
+.wiki-content input {
+	font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.wiki-content a {
+	text-decoration: none;
+}
+
+.wiki-content a:hover,
+.wiki-content a:active {
+	text-decoration: underline;
+}
+
+.wiki-content h1,
+.wiki-content h2,
+.wiki-content h3,
+.wiki-content h4,
+.wiki-content h5,
+.wiki-content h6 {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	line-height: 1.1;
+}
+
+.wiki-content h1 {
+	font-size: 30px;
+}
+
+.wiki-content h2 {
+	font-size: 21px;
+}
+
+.wiki-content h3 {
+	font-size: 16px;
+}
+
+.wiki-content h4 {
+	font-size: 14px;
+}
+
+.wiki-content h5 {
+	font-size: 12px;
+}
+
+.wiki-content h6 {
+	font-size: 11px;
+}
+
+.wiki-content blockquote {
+	margin: 0;
+}
+
+.wiki-content ul,
+.wiki-content ol {
+	padding: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.wiki-content ol ol,
+.wiki-content ul ol {
+	list-style-type: lower-roman;
+}
+
+.wiki-content ul ul ol,
+.wiki-content ul ol ol,
+.wiki-content ol ul ol,
+.wiki-content ol ol ol {
+	list-style-type: lower-alpha;
+}
+
+.wiki-content dd {
+	margin-left: 0;
+}
+
+.wiki-content .select::-ms-expand {
+	opacity: 0;
+}
+
+.wiki-content .octicon {
+	font: normal normal normal 16px/1 octicons-anchor;
+	display: inline-block;
+	text-decoration: none;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.wiki-content .octicon-link:before {
+	content: '\f05c';
+}
+
+.wiki-content>*:first-child {
+	margin-top: 0 !important;
+}
+
+.wiki-content>*:last-child {
+	margin-bottom: 0 !important;
+}
+
+.wiki-content a:not([href]) {
+	color: inherit;
+	text-decoration: none;
+}
+
+.wiki-content .anchor {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	padding-right: 6px;
+	padding-left: 30px;
+	margin-left: -30px;
+}
+
+.wiki-content .anchor:focus {
+	outline: none;
+}
+
+.wiki-content h1,
+.wiki-content h2,
+.wiki-content h3,
+.wiki-content h4,
+.wiki-content h5,
+.wiki-content h6 {
+	position: relative;
+	margin-top: 1em;
+	margin-bottom: 16px;
+	font-weight: bold;
+	line-height: 1.4;
+}
+
+.wiki-content h1 .octicon-link,
+.wiki-content h2 .octicon-link,
+.wiki-content h3 .octicon-link,
+.wiki-content h4 .octicon-link,
+.wiki-content h5 .octicon-link,
+.wiki-content h6 .octicon-link {
+	display: none;
+	color: #000;
+	vertical-align: middle;
+}
+
+.wiki-content h1:hover .anchor,
+.wiki-content h2:hover .anchor,
+.wiki-content h3:hover .anchor,
+.wiki-content h4:hover .anchor,
+.wiki-content h5:hover .anchor,
+.wiki-content h6:hover .anchor {
+	padding-left: 8px;
+	margin-left: -30px;
+	text-decoration: none;
+}
+
+.wiki-content h1:hover .anchor .octicon-link,
+.wiki-content h2:hover .anchor .octicon-link,
+.wiki-content h3:hover .anchor .octicon-link,
+.wiki-content h4:hover .anchor .octicon-link,
+.wiki-content h5:hover .anchor .octicon-link,
+.wiki-content h6:hover .anchor .octicon-link {
+	display: inline-block;
+}
+
+.wiki-content h1 {
+	padding-bottom: 0.3em;
+	font-size: 2.25em;
+	line-height: 1.2;
+	border-bottom: 1px solid rgba(127,127,127,.6);
+}
+
+.wiki-content h1 .anchor {
+	line-height: 1;
+}
+
+.wiki-content h2 {
+	padding-bottom: 0.3em;
+	font-size: 1.75em;
+	line-height: 1.225;
+	border-bottom: 1px solid rgba(127,127,127,.6);
+}
+
+.wiki-content h2 .anchor {
+	line-height: 1;
+}
+
+.wiki-content h3 {
+	font-size: 1.5em;
+	line-height: 1.43;
+}
+
+.wiki-content h3 .anchor {
+	line-height: 1.2;
+}
+
+.wiki-content h4 {
+	font-size: 1.25em;
+}
+
+.wiki-content h4 .anchor {
+	line-height: 1.2;
+}
+
+.wiki-content h5 {
+	font-size: 1em;
+}
+
+.wiki-content h5 .anchor {
+	line-height: 1.1;
+}
+
+.wiki-content h6 {
+	font-size: 1em;
+	/*color: #777;*/
+}
+
+.wiki-content h6 .anchor {
+	line-height: 1.1;
+}
+
+.wiki-content p,
+.wiki-content blockquote,
+.wiki-content ul,
+.wiki-content ol,
+.wiki-content dl,
+.wiki-content table,
+.wiki-content pre {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+.wiki-content ul,
+.wiki-content ol {
+	padding-left: 2em;
+}
+
+.wiki-content ul ul,
+.wiki-content ul ol,
+.wiki-content ol ol,
+.wiki-content ol ul {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.wiki-content li>p {
+	margin-top: 16px;
+}
+
+.wiki-content dl {
+	padding: 0;
+}
+
+.wiki-content dl dt {
+	padding: 0;
+	margin-top: 16px;
+	font-size: 1em;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.wiki-content dl dd {
+	padding: 0 16px;
+	margin-bottom: 16px;
+}
+
+.wiki-content blockquote {
+	padding: 0 15px;
+	border-left: 4px solid rgba(127,127,127,.6);
+}
+
+.wiki-content blockquote>:first-child {
+	margin-top: 0;
+}
+
+.wiki-content blockquote>:last-child {
+	margin-bottom: 0;
+}
+
+.wiki-content table {
+	display: block;
+	width: 100%;
+	overflow: auto;
+	word-break: normal;
+	word-break: keep-all;
+}
+
+.wiki-content table th {
+	font-weight: bold;
+}
+
+.wiki-content table th,
+.wiki-content table td {
+	padding: 6px 13px;
+	border: 1px solid rgba(127,127,127,.6);
+}
+
+.wiki-content table tr {
+	border-top: 1px solid rgba(127,127,127,.5);
+}
+
+.wiki-content img {
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.wiki-content .highlight {
+	margin-bottom: 16px;
+}
+
+.wiki-content kbd {
+	display: inline-block;
+	padding: 3px 5px;
+	font-size: 11px;
+	line-height: 10px;
+	vertical-align: middle;
+	border-radius: 3px;
+}
+
+.wiki-content kbd {
+	display: inline-block;
+	padding: 3px 5px;
+	font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	line-height: 10px;
+	vertical-align: middle;
+	border-radius: 3px;
+}
+
+.wiki-content .task-list-item {
+	list-style-type: none;
+}
+
+.wiki-content .task-list-item+.task-list-item {
+	margin-top: 3px;
+}
+
+.wiki-content .task-list-item input {
+	margin: 0 0.35em 0.25em -1.6em;
+	vertical-align: middle;
+}
+
+.wiki-content :checked+.radio-label {
+	z-index: 1;
+	position: relative;
+}

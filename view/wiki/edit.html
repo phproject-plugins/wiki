@@ -2,6 +2,10 @@
 <html lang="{{ @this->lang() }}">
 <head>
 	<include href="blocks/head.html" />
+	<check if="{{ @parse.markdown }}">
+		<link rel="stylesheet" type="text/css" href="{{ @BASE }}/app/plugin/wiki/css/wiki.css">
+		<link rel="stylesheet" type="text/css" href="{{ @BASE }}/css/simplemde.min.css">
+	</check>
 </head>
 <body>
 <div class="container">
@@ -16,6 +20,18 @@
 			<input class="form-control input-sm" name="slug" id="slug" value="{{ @page.slug ?: @PARAMS.page | esc }}" required maxlength="64">
 		</div>
 		<div class="form-group">
+			<label for="slug">{{ @dict.wiki.parent }}</label>
+			<select class="form-control input-sm" name="parent_id">
+					<option value="">(No parent)</option>
+					<repeat group="{{ @pages }}" value="{{ @wikipage }}">
+						<check if="{{ !empty(@page.parent_id) && @page.parent_id == @wikipage.id }}">
+							<true><option value="{{ @wikipage.id }}" selected>{{ @wikipage.name }}</option></true>
+							<false><option value="{{ @wikipage.id }}">{{ @wikipage.name }}</option></false>
+						</check>
+					</repeat>
+			</select>
+		</div>
+		<div class="form-group wiki-content">
 			<label for="content">{{ @dict.wiki.content }}</label>
 			<textarea class="form-control input-sm" name="content" id="content" rows="12" required>{{ @page.content | esc }}</textarea>
 		</div>
@@ -26,6 +42,9 @@
 		</div>
 	</form>
 	<include href="blocks/footer.html" />
+	<check if="{{ @parse.markdown }}">
+		<script src="{{ @BASE }}/js/simplemde.min.js"></script>
+	</check>
 	<script type="text/javascript">
 	function slug(str) {
 		str = str.replace(/^\s+|\s+$/g, '');
@@ -37,7 +56,7 @@
 			str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
 		}
 
-		return str.replace(/[^a-z0-9 -]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+		return str.replace(/[^a-z0-9\s-]/g, '').replace(/[\s-]+/g, '-');
 	}
 	$(document).ready(function() {
 		if(!$('#slug').val().length) {
@@ -49,6 +68,11 @@
 			});
 		}
 	});
+	var simplemde = new SimpleMDE({
+		element: document.getElementById('content'),
+		toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 'ordered-list', '|', 'link', 'image', '|', 'preview', 'guide']
+	});
+	simplemde.render();
 	</script>
 </div>
 </body>
