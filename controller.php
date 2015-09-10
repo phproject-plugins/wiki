@@ -52,6 +52,11 @@ class Controller extends \Controller {
 		$updateCount = $db->exec("SELECT COUNT(*) num FROM wiki_page_update WHERE wiki_page_id = :id", array(":id" => $page->id));
 		$f3->set("update_count", intval($updateCount[0]['num']));
 
+		// Load pages list
+		$pages = $this->build_tree($page->find(array("deleted_date IS NULL"), array("order" => "name ASC")));
+
+		$f3->set("pages", $pages);
+
 		$f3->set("title", $page->name);
 		$f3->set("page", $page);
 		$f3->set("update", $update);

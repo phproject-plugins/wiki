@@ -26,8 +26,31 @@
 		</p>
 	</check>
 	<hr>
-	<div class="tex wiki-content">
-		{{ @page.content | parseText }}
+	<div class="row">
+		<div class="col-sm-9">
+			<div class="tex wiki-content">
+				{{ @page.content | parseText }}
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">Pages&ensp;<span class="badge">{{ count(@pages) }}</span></div>
+				<div class="list-group">
+					<repeat group="{{ @pages }}" value="{{ @page }}">
+						<a style="padding-left: {{ 20*(@page.indent+1) }}px;" href="{{ @BASE }}/wiki/{{ @page.slug }}" class="list-group-item">
+							<check if="{{ @page.indent }}">
+								<true>
+									{{ @page.name }}
+								</true>
+								<false>
+									<b>{{ @page.name }}</b>
+								</false>
+							</check>
+						</a>
+					</repeat>
+				</div>
+			</div>
+		</div>
 	</div>
 	<include href="blocks/footer.html" />
 </div>
