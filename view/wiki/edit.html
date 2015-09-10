@@ -33,7 +33,7 @@
 		</div>
 		<div class="form-group wiki-content">
 			<label for="content">{{ @dict.wiki.content }}</label>
-			<textarea class="form-control input-sm" name="content" id="content" rows="12" required>{{ @page.content | esc }}</textarea>
+			<textarea class="form-control input-sm" name="content" id="content" rows="12">{{ @page.content | esc }}</textarea>
 		</div>
 		<div class="text-right">
 			<a href="{{ @site.url }}wiki/{{ @PARAMS.page }}" class="btn btn-sm btn-default">{{ @dict.cancel }}</a>
