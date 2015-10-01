@@ -9,9 +9,9 @@
 	<check if="{{ @pages }}">
 		<true>
 			<div class="clearfix">
-				<h1 class="pull-left">Wiki Pages</h1>
+				<h1 class="pull-left">{{ @dict.wiki.pages }}</h1>
 				<div class="pull-right" style="margin-top: 1.5em;">
-					<a href="{{ @BASE }}/wiki/edit/" class="btn btn-primary btn-sm">New Page</a>
+					<a href="{{ @BASE }}/wiki/edit/" class="btn btn-primary btn-sm">{{ @dict.wiki.new }}</a>
 				</div>
 			</div>
 			<br>
@@ -36,9 +36,9 @@
 			<div class="well">
 				<div class="text-center" style="margin: 2em 0;">
 					<p class="h3"><span class="fa fa-book"></span></p>
-					<h3>Welcome to the wiki!</h3>
-					<p>Wikis let you collaboratively build documentation for your projects.</p>
-					<a href="{{ @BASE }}/wiki/edit/" class="btn btn-primary btn-sm">Create a Page</a>
+					<h3>{{ @dict.wiki.welcome }}</h3>
+					<p>{{ @dict.wiki.intro }}</p>
+					<a href="{{ @BASE }}/wiki/edit/" class="btn btn-primary btn-sm">{{ @dict.wiki.create }}</a>
 				</div>
 			</div>
 		</false>

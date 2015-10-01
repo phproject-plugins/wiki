@@ -76,7 +76,9 @@ class Controller extends \Controller {
 		$page->indent = 0;
 		if($params["page"]) {
 			$page->load(array("slug = ?", $params["page"]));
-			$pages_selection = $page->find(array("deleted_date IS NULL AND id != ".$page->id), array("order" => "name ASC"));
+		}
+		if($page->id) {
+			$pages_selection = $page->find(array("deleted_date IS NULL AND id != ?", $page->id), array("order" => "name ASC"));
 		} else {
 			$pages_selection = $page->find(array("deleted_date IS NULL"), array("order" => "name ASC"));
 		}

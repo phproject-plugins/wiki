@@ -6,7 +6,13 @@
 <body>
 <div class="container">
 	<include href="blocks/navbar.html" />
-	<p>This Wiki page does not exist. You can <a href="{{ @site.url }}wiki/edit/{{ @PARAMS.page }}">create it</a>.</p>
+	<div class="well">
+		<div class="text-center" style="margin: 2em 0;">
+			<p class="h3"><span class="fa fa-book"></span></p>
+			<h3>404</h3>
+			<p>This Wiki page does not exist. You can <a href="{{ @site.url }}wiki/edit/{{ @PARAMS.page }}">create it</a>.</p>
+		</div>
+	</div>
 	<include href="blocks/footer.html" />
 </div>
 </body>

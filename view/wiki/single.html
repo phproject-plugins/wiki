@@ -21,8 +21,16 @@
 	</div>
 	<check if="{{ @update.id }}">
 		<p class="text-muted">
-			Page last edited by <a href="{{ @BASE }}/user/{{ @update_user.username }}" class="nolink">{{ @update_user.name }}</a> on {{ date('M j, Y', strtotime(@update.created_date)) }}
-			&middot; {{ @update_count }} {{ @update_count > 1 ? 'revisions' : 'revision' }}
+			{{ @dict.wiki.edited_by_x_on_n,@update_user.name,strtotime(@update.created_date) | format }}
+			&middot;
+			<check if="{{ @update_count > 1 }}">
+				<true>
+					{{ @dict.wiki.n_revisions,@update_count | format }}
+				</true>
+				<false>
+					{{ @dict.wiki.1_revision }}
+				</false>
+			</check>
 		</p>
 	</check>
 	<hr>
