@@ -42,7 +42,7 @@
 		</div>
 	</form>
 	<include href="blocks/footer.html" />
-	<check if="{{ @parse.markdown }}">
+	<check if="{{ @parse.markdown && !@user_obj->option('disable_mde') }}">
 		<script src="{{ @BASE }}/js/simplemde.min.js"></script>
 	</check>
 	<script type="text/javascript">
@@ -68,11 +68,13 @@
 			});
 		}
 	});
-	var simplemde = new SimpleMDE({
-		element: document.getElementById('content'),
-		toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 'ordered-list', '|', 'link', 'image', '|', 'preview', 'guide']
-	});
-	simplemde.render();
+	if(typeof window.SimpleMDE != 'undefined') {
+		var simplemde = new SimpleMDE({
+			element: document.getElementById('content'),
+			toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 'ordered-list', '|', 'link', 'image', '|', 'preview', 'guide']
+		});
+		simplemde.render();
+	}
 	</script>
 </div>
 </body>
