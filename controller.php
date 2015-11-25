@@ -10,7 +10,7 @@ namespace Plugin\Wiki;
 class Controller extends \Controller {
 
 	public function index($f3) {
-		$this->_requireLogin(0);
+		$this->_requireLogin(\Model\User::RANK_GUEST);
 
 		$page = new Model\Page;
 		$page->indent = 0;
@@ -24,7 +24,7 @@ class Controller extends \Controller {
 	}
 
 	public function single($f3, $params) {
-		$this->_requireLogin(0);
+		$this->_requireLogin(\Model\User::RANK_GUEST);
 
 		$page = new Model\Page;
 		$page->load(array("slug = ?", $params["page"]));
@@ -65,7 +65,7 @@ class Controller extends \Controller {
 
 	public function edit($f3, $params) {
 
-		$this->_requireLogin(2);
+		$this->_requireLogin(\Model\User::RANK_USER);
 
 		if(!isset($params["page"])) {
 			$params["page"] = null;
@@ -132,7 +132,7 @@ class Controller extends \Controller {
 	}
 
 	public function delete($f3, $params) {
-		$this->_requireLogin(3);
+		$this->_requireLogin(\Model\User::RANK_MANAGER);
 
 		$page = new Model\Page;
 		$page->load(array("slug = ?", $params["page"]));
