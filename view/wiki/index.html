@@ -11,7 +11,7 @@
 			<div class="clearfix">
 				<h1 class="pull-left">{{ @dict.wiki.pages }}</h1>
 				<div class="pull-right" style="margin-top: 1.5em;">
-					<a href="{{ @BASE }}/wiki/edit/" class="btn btn-primary btn-sm">{{ @dict.wiki.new }}</a>
+					<a href="{{ @BASE }}/wiki/edit/" class="btn btn-primary btn-sm" id="btn-new">{{ @dict.wiki.new }}</a>
 				</div>
 			</div>
 			<br>
@@ -45,5 +45,16 @@
 	</check>
 	<include href="blocks/footer.html" />
 </div>
+<script type="text/javascript">
+	// Bind keyup to hotkey handler
+	$(document).on('keyup', function(e) {
+		// Only handle hotkeys when not in a form context
+		if(e.target.type != 'textarea' && e.target.tagName != 'INPUT' && e.target.tagName != 'SELECT') {
+			if(e.which == 78 && !e.shiftKey && !e.metaKey && !e.ctrlKey && !e.altKey) {
+				window.location = BASE + '/wiki/edit/';
+			}
+		}
+	});
+</script>
 </body>
 </html>

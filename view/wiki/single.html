@@ -66,5 +66,19 @@
 	</div>
 	<include href="blocks/footer.html" />
 </div>
+<script type="text/javascript">
+	// Bind keyup to hotkey handler
+	$(document).on('keyup', function(e) {
+		// Only handle hotkeys when not in a form context
+		if(e.target.type != 'textarea' && e.target.tagName != 'INPUT' && e.target.tagName != 'SELECT') {
+			if(e.which == 69 && !e.shiftKey && !e.metaKey && !e.ctrlKey && !e.altKey) {
+				window.location = BASE + '/wiki/edit/{{ @page.slug }}';
+			}
+			if(e.which == 51 && e.shiftKey && !e.metaKey && !e.ctrlKey && !e.altKey) {
+				window.location = BASE + '/wiki/delete/{{ @page.slug }}';
+			}
+		}
+	});
+</script>
 </body>
 </html>
