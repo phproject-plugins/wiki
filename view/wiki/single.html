@@ -48,14 +48,14 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Pages&ensp;<span class="badge">{{ count(@pages) }}</span></div>
 				<div class="list-group">
-					<repeat group="{{ @pages }}" value="{{ @page }}">
-						<a style="padding-left: {{ 20*(@page.indent+1) }}px;" href="{{ @BASE }}/wiki/{{ @page.slug }}" class="list-group-item">
-							<check if="{{ @page.indent }}">
+					<repeat group="{{ @pages }}" value="{{ @item }}">
+						<a style="padding-left: {{ 20*(@item.indent+1) }}px;" href="{{ @BASE }}/wiki/{{ @item.slug }}" class="list-group-item">
+							<check if="{{ @item.indent }}">
 								<true>
-									{{ @page.name }}
+									{{ @item.name }}
 								</true>
 								<false>
-									<b>{{ @page.name }}</b>
+									<b>{{ @item.name }}</b>
 								</false>
 							</check>
 						</a>
