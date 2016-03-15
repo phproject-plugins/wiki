@@ -41,7 +41,7 @@
 	<div class="row">
 		<div class="col-sm-9">
 			<div class="tex wiki-content">
-				{{ @page.content | parseText }}
+				{{ @page.content,@wiki.parse | parseText }}
 			</div>
 		</div>
 		<div class="col-sm-3">

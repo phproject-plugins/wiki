@@ -1,0 +1,65 @@
+<div class="row">
+	<div class="col-sm-4">
+		<div class="well well-sm text-center">
+			<h4>Pages</h4>
+			<h2>{{ @count_page }}</h2>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="well well-sm text-center">
+			<h4>Contributors</h4>
+			<h2>{{ @count_page_update_user }}</h2>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="well well-sm text-center">
+			<h4>Edits</h4>
+			<h2>{{ @count_page_update }}</h2>
+		</div>
+	</div>
+</div>
+
+<form id="frm-wiki-parse" action="{{ @BASE }}/admin/plugins/wiki" method="post">
+	<fieldset>
+		<legend style="margin-bottom: 0;">Parser Syntax:</legend>
+		<div class="form-group">
+			<div class="checkbox">
+				<label>
+					<check if="{{ isset(@wiki.parse.markdown) ? @wiki.parse.markdown : @parse.markdown }}">
+						<true>
+							<input type="checkbox" name="parse.markdown" value="1" autocomplete="off" checked>
+						</true>
+						<false>
+							<input type="checkbox" name="parse.markdown" value="1" autocomplete="off">
+						</false>
+					</check>
+					Markdown
+				</label>
+			</div>
+			<div class="checkbox">
+				<label>
+					<check if="{{ isset(@wiki.parse.textile) ? @wiki.parse.textile : @parse.textile }}">
+						<true>
+							<input type="checkbox" name="parse.textile" value="1" autocomplete="off" checked>
+						</true>
+						<false>
+							<input type="checkbox" name="parse.textile" value="1" autocomplete="off">
+						</false>
+					</check>
+					Textile
+				</label>
+			</div>
+		</div>
+	</fieldset>
+</form>
+
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+	$('#frm-wiki-parse input').change(function() {
+		$.post($('#frm-wiki-parse').attr('action'), {
+			key: $(this).attr('name'),
+			val: $(this).prop('checked') ? 1 : 0
+		});
+	});
+});
+</script>

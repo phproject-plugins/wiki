@@ -19,8 +19,7 @@ class Controller extends \Controller {
 		$f3->set("title", "Wiki");
 		$f3->set("pages", $pages);
 
-		$f3->set("UI", $f3->get("UI") . ";./app/plugin/wiki/view/");
-		$this->_render("wiki/index.html");
+		$this->_render("wiki/view/index.html");
 	}
 
 	public function single($f3, $params) {
@@ -29,11 +28,10 @@ class Controller extends \Controller {
 		$page = new Model\Page;
 		$page->load(array("slug = ?", $params["page"]));
 
-		$f3->set("UI", $f3->get("UI") . ";./app/plugin/wiki/view/");
-
+		// Handle 404s
 		if(!$page->id) {
 			$f3->status(404);
-			$this->_render("wiki/404.html");
+			$this->_render("wiki/view/404.html");
 			return;
 		}
 
@@ -60,7 +58,7 @@ class Controller extends \Controller {
 		$f3->set("title", $page->name);
 		$f3->set("page", $page);
 		$f3->set("update", $update);
-		$this->_render("wiki/single.html");
+		$this->_render("wiki/view/single.html");
 	}
 
 	public function edit($f3, $params) {
@@ -127,8 +125,7 @@ class Controller extends \Controller {
 
 		$f3->set("title", "Edit Page");
 		$f3->set("page", $page);
-		$f3->set("UI", $f3->get("UI") . ";./app/plugin/wiki/view/");
-		$this->_render("wiki/edit.html");
+		$this->_render("wiki/view/edit.html");
 	}
 
 	public function delete($f3, $params) {
@@ -139,7 +136,6 @@ class Controller extends \Controller {
 		$page->delete();
 		$f3->reroute("/wiki");
 	}
-
 
 	function build_tree($pages, $add_spaces = false) {
 		$data = array();
