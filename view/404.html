@@ -13,7 +13,7 @@
 			<p>
 				This Wiki page does not exist.
 				<check if="{{ @@user.rank >= \Model\User::RANK_USER }}">
-					You can <a href="{{ @site.url }}wiki/edit/{{ @PARAMS.page }}">create it</a>.
+					You can <a href="{{ @BASE }}/wiki/edit/{{ @PARAMS.page }}">create it</a>.
 				</check>
 			</p>
 		</div>
