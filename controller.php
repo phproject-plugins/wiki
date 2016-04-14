@@ -53,6 +53,11 @@ class Controller extends \Controller {
 		// Load pages list
 		$pages = $this->build_tree($page->find(array("deleted_date IS NULL"), array("order" => "name ASC")));
 
+		// Set default parser options to empty array
+		if($f3->get("wiki.parse") === null) {
+			$f3->set("wiki.parse", array());
+		}
+
 		$f3->set("pages", $pages);
 
 		$f3->set("title", $page->name);
@@ -62,7 +67,6 @@ class Controller extends \Controller {
 	}
 
 	public function edit($f3, $params) {
-
 		$this->_requireLogin(\Model\User::RANK_USER);
 
 		if(!isset($params["page"])) {
