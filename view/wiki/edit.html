@@ -70,6 +70,7 @@
 	});
 	if(typeof window.SimpleMDE != 'undefined') {
 		var simplemde = new SimpleMDE({
+			autoDownloadFontAwesome: false,
 			element: document.getElementById('content'),
 			toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 'ordered-list', '|', 'link', 'image', '|', 'preview', 'guide']
 		});
