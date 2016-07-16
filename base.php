@@ -61,17 +61,28 @@ class Base extends \Plugin {
 		$f3 = \Base::instance();
 		$db = $f3->get("db.instance");
 
-		// Gather some stats
-		$result = $db->exec("SELECT COUNT(id) AS `count` FROM wiki_page WHERE deleted_date IS NULL");
-		$f3->set("count_page", $result[0]["count"]);
-		$result = $db->exec("SELECT COUNT(DISTINCT user_id) AS `count` FROM wiki_page_update");
-		$f3->set("count_page_update_user", $result[0]["count"]);
-		$result = $db->exec("SELECT COUNT(id) AS `count` FROM wiki_page_update");
-		$f3->set("count_page_update", $result[0]["count"]);
+		if($f3->get("AJAX")) {
+			// Update configuration value
+			switch($f3->get("POST.key")) {
+				case 'parse.markdown':
+				case 'parse.textile':
+					\Model\Config::setVal("wiki." . $f3->get("POST.key"), (int)$f3->get("POST.val"));
+					break;
+				default:
+					$f3->error(400);
+			}
+		} else {
+			// Gather some stats
+			$result = $db->exec("SELECT COUNT(id) AS `count` FROM wiki_page WHERE deleted_date IS NULL");
+			$f3->set("count_page", $result[0]["count"]);
+			$result = $db->exec("SELECT COUNT(DISTINCT user_id) AS `count` FROM wiki_page_update");
+			$f3->set("count_page_update_user", $result[0]["count"]);
+			$result = $db->exec("SELECT COUNT(id) AS `count` FROM wiki_page_update");
+			$f3->set("count_page_update", $result[0]["count"]);
 
-		// Render view
-		$f3->set("UI", $f3->get("UI") . ";./app/plugin/wiki/view/");
-		echo \Helper\View::instance()->render("admin/plugin-wiki.html");
+			// Render view
+			echo \Helper\View::instance()->render("wiki/view/admin.html");
+		}
 	}
 
 }

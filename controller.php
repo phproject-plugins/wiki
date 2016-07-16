@@ -10,7 +10,7 @@ namespace Plugin\Wiki;
 class Controller extends \Controller {
 
 	public function index($f3) {
-		$this->_requireLogin(0);
+		$this->_requireLogin(\Model\User::RANK_GUEST);
 
 		$page = new Model\Page;
 		$page->indent = 0;
@@ -19,21 +19,19 @@ class Controller extends \Controller {
 		$f3->set("title", "Wiki");
 		$f3->set("pages", $pages);
 
-		$f3->set("UI", $f3->get("UI") . ";./app/plugin/wiki/view/");
-		$this->_render("wiki/index.html");
+		$this->_render("wiki/view/index.html");
 	}
 
 	public function single($f3, $params) {
-		$this->_requireLogin(0);
+		$this->_requireLogin(\Model\User::RANK_GUEST);
 
 		$page = new Model\Page;
 		$page->load(array("slug = ?", $params["page"]));
 
-		$f3->set("UI", $f3->get("UI") . ";./app/plugin/wiki/view/");
-
+		// Handle 404s
 		if(!$page->id) {
 			$f3->status(404);
-			$this->_render("wiki/404.html");
+			$this->_render("wiki/view/404.html");
 			return;
 		}
 
@@ -55,17 +53,21 @@ class Controller extends \Controller {
 		// Load pages list
 		$pages = $this->build_tree($page->find(array("deleted_date IS NULL"), array("order" => "name ASC")));
 
+		// Set default parser options to empty array
+		if($f3->get("wiki.parse") === null) {
+			$f3->set("wiki.parse", array());
+		}
+
 		$f3->set("pages", $pages);
 
 		$f3->set("title", $page->name);
 		$f3->set("page", $page);
 		$f3->set("update", $update);
-		$this->_render("wiki/single.html");
+		$this->_render("wiki/view/single.html");
 	}
 
 	public function edit($f3, $params) {
-
-		$this->_requireLogin(2);
+		$this->_requireLogin(\Model\User::RANK_USER);
 
 		if(!isset($params["page"])) {
 			$params["page"] = null;
@@ -127,19 +129,17 @@ class Controller extends \Controller {
 
 		$f3->set("title", "Edit Page");
 		$f3->set("page", $page);
-		$f3->set("UI", $f3->get("UI") . ";./app/plugin/wiki/view/");
-		$this->_render("wiki/edit.html");
+		$this->_render("wiki/view/edit.html");
 	}
 
 	public function delete($f3, $params) {
-		$this->_requireLogin(3);
+		$this->_requireLogin(\Model\User::RANK_MANAGER);
 
 		$page = new Model\Page;
 		$page->load(array("slug = ?", $params["page"]));
 		$page->delete();
 		$f3->reroute("/wiki");
 	}
-
 
 	function build_tree($pages, $add_spaces = false) {
 		$data = array();
