@@ -16,7 +16,8 @@ class Base extends \Plugin {
 		$f3 = \Base::instance();
 
 		// Add menu item
-		$this->_addNav("wiki", $f3->get("dict.wiki.wiki"), '/$\\/wiki/i');
+		$this->_addNav("wiki", $f3->get("dict.wiki.wiki"), "/^\\/wiki/i");
+		$this->_addNav("wiki/edit", $f3->get("dict.wiki.page"), "/^\\/wiki\\/edit\\/?$/i", "new");
 
 		// Add routes
 		$f3->route("GET /wiki", "Plugin\Wiki\Controller->index");
@@ -64,8 +65,8 @@ class Base extends \Plugin {
 		if($f3->get("AJAX")) {
 			// Update configuration value
 			switch($f3->get("POST.key")) {
-				case 'parse.markdown':
-				case 'parse.textile':
+				case "parse.markdown":
+				case "parse.textile":
 					\Model\Config::setVal("wiki." . $f3->get("POST.key"), (int)$f3->get("POST.val"));
 					break;
 				default:
