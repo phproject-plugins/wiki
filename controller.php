@@ -53,10 +53,12 @@ class Controller extends \Controller {
 		// Load pages list
 		$pages = $this->build_tree($page->find(array("deleted_date IS NULL"), array("order" => "name ASC")));
 
-		// Set default parser options to empty array
+		// Set default parser options to disable issue-related replacements
 		if($f3->get("wiki.parse") === null) {
 			$f3->set("wiki.parse", array());
 		}
+		$f3->set("wiki.parse.ids", false);
+		$f3->set("wiki.parse.hashtags", false);
 
 		$f3->set("pages", $pages);
 
