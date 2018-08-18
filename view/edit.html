@@ -10,7 +10,7 @@
 <body>
 <div class="container">
 	<include href="blocks/navbar.html" />
-	<form action="{{ @site.url }}wiki/edit/{{ @PARAMS.page }}" method="post" autocomplete="off">
+	<form action="{{ @BASE }}/wiki/edit/{{ @PARAMS.page }}" method="post" autocomplete="off">
 		<div class="form-group">
 			<label for="name">{{ @dict.wiki.page_title }}</label>
 			<input type="text" class="form-control" name="name" id="name" value="{{ @page.name | esc }}" required maxlength="64">
@@ -22,13 +22,13 @@
 		<div class="form-group">
 			<label for="slug">{{ @dict.wiki.parent }}</label>
 			<select class="form-control input-sm" name="parent_id">
-					<option value="">(No parent)</option>
-					<repeat group="{{ @pages }}" value="{{ @wikipage }}">
-						<check if="{{ !empty(@page.parent_id) && @page.parent_id == @wikipage.id }}">
-							<true><option value="{{ @wikipage.id }}" selected>{{ @wikipage.name }}</option></true>
-							<false><option value="{{ @wikipage.id }}">{{ @wikipage.name }}</option></false>
-						</check>
-					</repeat>
+				<option value="">(No parent)</option>
+				<repeat group="{{ @pages }}" value="{{ @wikipage }}">
+					<check if="{{ !empty(@page.parent_id) && @page.parent_id == @wikipage.id }}">
+						<true><option value="{{ @wikipage.id }}" selected>{{ @wikipage.name }}</option></true>
+						<false><option value="{{ @wikipage.id }}">{{ @wikipage.name }}</option></false>
+					</check>
+				</repeat>
 			</select>
 		</div>
 		<div class="form-group wiki-content">
@@ -36,7 +36,7 @@
 			<textarea class="form-control input-sm" name="content" id="content" rows="12">{{ @page.content | esc }}</textarea>
 		</div>
 		<div class="text-right">
-			<a href="{{ @site.url }}wiki/{{ @PARAMS.page }}" class="btn btn-sm btn-default">{{ @dict.cancel }}</a>
+			<a href="{{ @BASE }}/wiki/{{ @PARAMS.page }}" class="btn btn-sm btn-default">{{ @dict.cancel }}</a>
 			<button type="reset" class="btn btn-sm btn-default">{{ @dict.reset }}</button>
 			<button type="submit" class="btn btn-sm btn-primary">{{ @dict.save }}</button>
 		</div>
