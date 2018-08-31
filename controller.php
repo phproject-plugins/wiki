@@ -16,7 +16,7 @@ class Controller extends \Controller {
 		$page->indent = 0;
 		$pages = $this->build_tree($page->find(array("deleted_date IS NULL"), array("order" => "name ASC")));
 
-		$f3->set("title", "Wiki");
+		$f3->set("title", $f3->get('dict.wiki.wiki'));
 		$f3->set("pages", $pages);
 
 		$this->_render("wiki/view/index.html");
