@@ -1,4 +1,4 @@
-SET NAMES utf8;
+SET NAMES utf8mb4;
 
 DROP TABLE IF EXISTS `wiki_page`;
 CREATE TABLE `wiki_page` (
@@ -10,7 +10,7 @@ CREATE TABLE `wiki_page` (
 	`created_date` datetime NOT NULL,
 	`deleted_date` datetime NULL,
 	PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `wiki_page_update`;
 CREATE TABLE `wiki_page_update` (
@@ -25,4 +25,4 @@ CREATE TABLE `wiki_page_update` (
 	PRIMARY KEY (`id`),
 	KEY `wiki_page_update_user` (`user_id`),
 	CONSTRAINT `wiki_page_update_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
