@@ -155,7 +155,7 @@ class Controller extends \Controller {
 		$newarray = array();
 		$level = 0;
 		foreach ($pages as $row) {
-			if($row["parent_id"] == "") {
+			if($row["parent_id"] == "" || $row["parent_id"] == 0) {
 				if($add_spaces){
 					$row["name"] = str_repeat("&emsp;", $level) . $row["name"];
 				}
