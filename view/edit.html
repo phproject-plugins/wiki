@@ -4,7 +4,7 @@
 	<include href="blocks/head.html" />
 	<check if="{{ @parse.markdown }}">
 		<link rel="stylesheet" type="text/css" href="{{ @BASE }}/app/plugin/wiki/css/wiki.css">
-		<link rel="stylesheet" type="text/css" href="{{ @BASE }}/css/simplemde.min.css">
+		<link rel="stylesheet" type="text/css" href="{{ @BASE }}/css/easymde.min.css">
 	</check>
 </head>
 <body>
@@ -43,7 +43,7 @@
 	</form>
 	<include href="blocks/footer.html" />
 	<check if="{{ @parse.markdown && !@user_obj->option('disable_mde') }}">
-		<script src="{{ @BASE }}/js/simplemde.min.js"></script>
+		<script src="{{ @BASE }}/js/easymde.min.js"></script>
 	</check>
 	<script type="text/javascript">
 	function slug(str) {
@@ -68,13 +68,13 @@
 			});
 		}
 	});
-	if(typeof window.SimpleMDE != 'undefined') {
-		var simplemde = new SimpleMDE({
+	if(typeof window.EasyMDE != 'undefined') {
+		var mde = new EasyMDE({
 			autoDownloadFontAwesome: false,
 			element: document.getElementById('content'),
 			toolbar: ['bold', 'italic', 'heading', '|', 'quote', 'unordered-list', 'ordered-list', '|', 'link', 'image', '|', 'preview', 'guide']
 		});
-		simplemde.render();
+		mde.render();
 	}
 	</script>
 </div>
