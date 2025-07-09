@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package  Wiki
  * @author   Alan Hardman <alan@phpizza.com>
@@ -7,8 +8,7 @@
 
 namespace Plugin\Wiki\Model;
 
-class Page extends \Model {
-
-	protected $_table_name = "wiki_page";
-
+class Page extends \Model
+{
+    protected $_table_name = "wiki_page";
 }
